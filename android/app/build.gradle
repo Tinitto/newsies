@@ -96,7 +96,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = true
+def enableProguardInReleaseBuilds = false
 
 /**
  * The preferred build flavor of JavaScriptCore.
@@ -124,21 +124,21 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 * For auomatically generating versionCode (integer) and versionName (string) from
 * package.json
 */
-import groovy.json.JsonSlurper
+// import groovy.json.JsonSlurper
 
-def getNpmVersion() {
-    def inputFile = new File("../package.json")
-    def packageJson = new JsonSlurper().parseText(inputFile.text)
-    return packageJson["version"]
-}
-/* calculated from git commits to give sequential integers */
-def getGitVersion() {
-    def process = "git rev-list master --first-parent --count".execute()
-    return process.text.toInteger()
-}
+// def getNpmVersion() {
+//     def inputFile = new File("../package.json")
+//     def packageJson = new JsonSlurper().parseText(inputFile.text)
+//     return packageJson["version"]
+// }
+// /* calculated from git commits to give sequential integers */
+// def getGitVersion() {
+//     def process = "git rev-list master --first-parent --count".execute()
+//     return process.text.toInteger()
+// }
 
-def userVer = getNpmVersion()
-def googleVer = getGitVersion()
+// def userVer = getNpmVersion()
+// def googleVer = getGitVersion()
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -152,8 +152,8 @@ android {
         applicationId "com.newsies"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode googleVer
-        versionName userVer
+        versionCode 2
+        versionName "1.1"
     }
     signingConfigs {
         release {
@@ -191,7 +191,7 @@ android {
             // signingConfig signingConfigs.debug
             signingConfig signingConfigs.release
             minifyEnabled enableProguardInReleaseBuilds
-            shrinkResources enableProguardInReleaseBuilds
+            // shrinkResources enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
