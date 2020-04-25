@@ -1,7 +1,5 @@
 import React, {useCallback} from 'react';
 import {NewsPost} from '../../../types/common';
-// attempt to get rid of moment
-// import moment from 'moment';
 import {StyleSheet, Linking} from 'react-native';
 import {Card, Text} from '@ui-kitten/components';
 import {TouchableOpacity} from 'react-native-gesture-handler';
