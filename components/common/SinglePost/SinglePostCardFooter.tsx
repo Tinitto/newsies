@@ -20,7 +20,6 @@ export const SinglePostCardFooter = ({
   const theme = useTheme();
   return (
     <Layout {...rest}>
-      <Text style={styles.footerTitle}>More from...</Text>
       <TouchableOpacity onPress={onPressPrimaryButton}>
         <Text
           // @ts-ignore
@@ -41,11 +40,6 @@ export const SinglePostCardFooter = ({
 
 // styles
 const styles = StyleSheet.create({
-  footerTitle: {
-    fontSize: 12,
-    opacity: 0.5,
-    marginBottom: 5,
-  },
   footerText: {
     paddingTop: 2,
     fontSize: 12,

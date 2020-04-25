@@ -71,6 +71,7 @@ export const SinglePost = ({
       <Text style={styles.paragraph}>
         {limitTextTo(newsPost.description, passageCharacterLimit)}
       </Text>
+      <Text style={[styles.paragraph, styles.footerTitle]}>More from...</Text>
       <SinglePostCardFooter
         style={[styles.paragraph, styles.detailsBar]}
         primaryButtonText={`Source: ${newsPost.source.name}`}
@@ -88,7 +89,6 @@ export const SinglePost = ({
 const styles = StyleSheet.create({
   detailsBar: {
     flex: 1,
-    marginTop: 15,
     marginHorizontal: -15,
   },
   titleWrapper: {
@@ -114,5 +114,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     opacity: 0.5,
     marginHorizontal: -15,
+  },
+  footerTitle: {
+    marginTop: 15,
+    marginBottom: 5,
   },
 });
