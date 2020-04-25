@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useLayoutEffect, useCallback} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {Popover, Layout, Spinner} from '@ui-kitten/components';
-import {SinglePost} from './SinglePost';
+import {SinglePost} from './SinglePost/SinglePost';
 import {StyleSheet, FlatList, Text} from 'react-native';
 import {NewsPost, CommonFunction} from '../../types/common';
 import store from '../../store';
@@ -113,7 +113,7 @@ export const NewsList = ({
       <FlatList
         style={styles.list}
         data={newsList}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item, index) => `${index}_${item.id}`}
         onEndReached={handleLoadMore}
         onEndReachedThreshold={0.5}
         initialNumToRender={8}

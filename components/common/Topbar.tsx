@@ -2,18 +2,25 @@ import React from 'react';
 import {
   TopNavigationAction,
   TopNavigation,
-  Toggle,
+  Divider,
+  Icon,
 } from '@ui-kitten/components';
 import {ThemeContext} from '../../state/theme.context';
-import {BackIcon} from '../icons/BackIcon';
 import {StyleSheet, Text} from 'react-native';
 
+// types
 type TopbarArgs = {
   navigation: any;
   shouldRenderBackAction?: any;
   title?: string;
 };
 
+// icons
+const LightIcon = (props: any) => <Icon {...props} name="sun" />;
+const DarkIcon = (props: any) => <Icon {...props} name="moon" />;
+const BackIcon = (props: any) => <Icon {...props} name="arrow-back" />;
+
+// component
 export const Topbar = ({
   navigation,
   shouldRenderBackAction = false,
@@ -32,39 +39,40 @@ export const Topbar = ({
   );
 
   const _renderThemeToggler = () => (
-    <Toggle
-      style={styles.toggle}
-      status="primary"
-      checked={themeContext.theme === 'dark'}
-      onChange={themeContext.toggleTheme}
-    />
+    <>
+      {themeContext.theme === 'dark' ? (
+        <TopNavigationAction
+          icon={LightIcon}
+          onPress={themeContext.toggleTheme}
+        />
+      ) : (
+        <TopNavigationAction
+          icon={DarkIcon}
+          onPress={themeContext.toggleTheme}
+        />
+      )}
+    </>
   );
 
   return (
-    <TopNavigation
-      title={(evaProps: any) => (
-        <Text {...evaProps} style={{...evaProps.style, ...styles.title}}>
-          {title}
-        </Text>
-      )}
-      alignment="center"
-      accessoryLeft={_renderBackAction}
-      accessoryRight={_renderThemeToggler}
-    />
+    <>
+      <TopNavigation
+        title={(evaProps: any) => (
+          <Text {...evaProps} style={{...evaProps.style, ...styles.title}}>
+            {title}
+          </Text>
+        )}
+        alignment="center"
+        accessoryLeft={_renderBackAction}
+        accessoryRight={_renderThemeToggler}
+      />
+      <Divider />
+    </>
   );
 };
 
+// styles
 const styles = StyleSheet.create({
-  toggle: {
-    height: 10,
-  },
-  toggleContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: 20,
-  },
-  toggleIcon: {},
   title: {
     fontWeight: 'bold',
     fontSize: 18,
