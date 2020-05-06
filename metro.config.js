@@ -13,6 +13,26 @@ const MetroConfig = require('@ui-kitten/metro-config');
 const evaConfig = {
   evaPackage: '@eva-design/eva',
 };
+const path = require('path');
+
+const extraNodeModules = {
+  components: path.join(__dirname, '/components'),
+  features: path.join(__dirname, '/features'),
+  store: path.join(__dirname, '/store'),
+  state: path.join(__dirname, '/state'),
+  types: path.join(__dirname, '/types'),
+  hooks: path.join(__dirname, '/hooks'),
+  utils: path.join(__dirname, '/utils'),
+};
+const watchFolders = [
+  path.join(__dirname, '/components'),
+  path.join(__dirname, '/features'),
+  path.join(__dirname, '/store'),
+  path.join(__dirname, '/state'),
+  path.join(__dirname, '/types'),
+  path.join(__dirname, '/hooks'),
+  path.join(__dirname, '/utils'),
+];
 
 module.exports = MetroConfig.create(evaConfig, {
   transformer: {
@@ -23,4 +43,8 @@ module.exports = MetroConfig.create(evaConfig, {
       },
     }),
   },
+  resolver: {
+    extraNodeModules,
+  },
+  watchFolders,
 });

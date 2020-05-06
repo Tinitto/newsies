@@ -1,37 +1,12 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {NewsPost} from '../../../types/common';
-import {StyleSheet, Linking} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {Card, Text} from '@ui-kitten/components';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SinglePostCardHeader} from './SinglePostCardHeader';
 import {SinglePostCardFooter} from './SinglePostCardFooter';
-
-/**
- * Limits the text to a given number of characters
- * @param text - the text to be truncated if too long
- * @param characterLimit - the maximum number of characters allowed
- */
-const limitTextTo = (text: string, characterLimit: number) =>
-  text &&
-  `${text.slice(0, characterLimit)}${
-    text.length > characterLimit ? '...' : ''
-  }`;
-
-/**
- * Generates a callback for opening an external url link
- * @param url - the url to link to
- * @param handleError - an error handler that deals with failed opening of a link
- */
-const useLinkTo = (url: string, handleError: (error: string) => any) =>
-  useCallback(async () => {
-    const supported = await Linking.canOpenURL(url);
-
-    if (supported) {
-      await Linking.openURL(url);
-    } else {
-      handleError(`Don't know how to open this URL: ${url}`);
-    }
-  }, [url, handleError]);
+import {useLinkTo} from 'hooks/useLinkTo';
+import {limitTextTo} from 'utils/text_utils';
 
 // the component
 export const SinglePost = ({

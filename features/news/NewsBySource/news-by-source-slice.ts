@@ -1,8 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { CommonFunction, NewsPost } from "../../../types/common";
+import {createSlice} from '@reduxjs/toolkit';
+import {CommonFunction, NewsPost} from '../../../types/common';
 
 export const NewsBySourceSlice = createSlice({
-  name: "news-by-source",
+  name: 'news-by-source',
   initialState: {
     list: [],
     page: 1,
@@ -52,9 +52,9 @@ export const {
 export const fetchSource = () => async (
   dispatch: CommonFunction,
   getState: CommonFunction,
-  apiBaseUrl: string
+  apiBaseUrl: string,
 ) => {
-  const { source = {}, sourceId } = getState().newsBySource;
+  const {source = {}, sourceId} = getState().newsBySource;
   if (sourceId && sourceId !== source.id) {
     const response = await fetch(`${apiBaseUrl}/sources/${sourceId}`);
     const newSource = await response.json();
@@ -71,19 +71,19 @@ export const fetchSource = () => async (
 export const fetchLatestNewsBySource = () => async (
   dispatch: CommonFunction,
   getState: CommonFunction,
-  apiBaseUrl: string
+  apiBaseUrl: string,
 ) => {
-  const { limit, page, list, sourceId } = getState().newsBySource;
+  const {limit, page, list, sourceId} = getState().newsBySource;
   const offset = (page - 1) * limit;
   // list has few stories, fetch more
   if (list.slice(offset, offset + limit).length < limit) {
     const response = await fetch(
-      `${apiBaseUrl}/news-posts?$limit=${limit}&$page=${page}&source_id=${sourceId}`
+      `${apiBaseUrl}/news-posts?$limit=${limit}&$page=${page}&source_id=${sourceId}`,
     );
     const {
       total,
       data,
-    }: { total: number; data: NewsPost[] } = await response.json();
+    }: {total: number; data: NewsPost[]} = await response.json();
 
     dispatch(setTotal(total));
     return dispatch(updateList(data));
@@ -92,7 +92,7 @@ export const fetchLatestNewsBySource = () => async (
 };
 
 export const changePage = (newPage: number) => async (
-  dispatch: CommonFunction
+  dispatch: CommonFunction,
 ) => {
   await dispatch(setPage(newPage));
   return dispatch(fetchLatestNewsBySource());
@@ -100,7 +100,7 @@ export const changePage = (newPage: number) => async (
 
 // Add selectors
 export const selectPaginatedLatestNews = (state: any) => {
-  const { limit, page, list } = state.newsBySource;
+  const {limit, page, list} = state.newsBySource;
   const offset = (page - 1) * limit;
   return list.slice(offset, offset + limit);
 };
