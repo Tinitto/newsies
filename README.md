@@ -55,4 +55,5 @@ An react native app with the latest random news.
 ## To-dos
 
 - [x] Add README
+- [ ] Correct the metro.config.js to watch all relevant files
 - [ ] Add app icons
