@@ -126,19 +126,19 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 */
 // import groovy.json.JsonSlurper
 
-// def getNpmVersion() {
-//     def inputFile = new File("../package.json")
-//     def packageJson = new JsonSlurper().parseText(inputFile.text)
-//     return packageJson["version"]
-// }
-// /* calculated from git commits to give sequential integers */
-// def getGitVersion() {
-//     def process = "git rev-list master --first-parent --count".execute()
-//     return process.text.toInteger()
-// }
+def getNpmVersion() {
+    def inputFile = new File("../package.json")
+    def packageJson = new JsonSlurper().parseText(inputFile.text)
+    return packageJson["version"]
+}
+/* calculated from git commits to give sequential integers */
+def getGitVersion() {
+    def process = "git rev-list master --first-parent --count".execute()
+    return process.text.toInteger()
+}
 
-// def userVer = getNpmVersion()
-// def googleVer = getGitVersion()
+def userVersion = getNpmVersion()
+def googleVersion = getGitVersion()
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -152,8 +152,8 @@ android {
         applicationId "com.newsies"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "1.1"
+        versionCode googleVersion
+        versionName userVersion
     }
     signingConfigs {
         release {
