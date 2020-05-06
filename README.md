@@ -1,6 +1,6 @@
 # Newsies
 
-An react native app with the latest random news.
+A react native app with the latest random news.
 
 ## Demos
 
