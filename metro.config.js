@@ -22,6 +22,7 @@ const extraNodeModules = {
   state: path.join(__dirname, '/state'),
   types: path.join(__dirname, '/types'),
   hooks: path.join(__dirname, '/hooks'),
+  utils: path.join(__dirname, '/utils'),
 };
 const watchFolders = [
   path.join(__dirname, '/components'),
@@ -30,6 +31,7 @@ const watchFolders = [
   path.join(__dirname, '/state'),
   path.join(__dirname, '/types'),
   path.join(__dirname, '/hooks'),
+  path.join(__dirname, '/utils'),
 ];
 
 module.exports = MetroConfig.create(evaConfig, {
